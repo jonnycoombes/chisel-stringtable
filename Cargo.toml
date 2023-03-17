@@ -12,3 +12,6 @@ repository = "https://github.com/jonnycoombes/chisel-stringtable"
 
 [dependencies]
 fxhash = "0.2.1"
+
+[features]
+default = []
