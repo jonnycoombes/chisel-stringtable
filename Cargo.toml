@@ -2,6 +2,13 @@
 name = "chisel-stringtable"
 version = "0.1.0"
 edition = "2021"
-
+authors = ["Jonny Coombes <jcoombes@jcs-software.co.uk>"]
+rust-version = "1.56"
+description = "Simple hash-based string cache"
+license = "MIT OR Apache-2.0"
+keywords = ["strings", "hash", "interning"]
+categories = ["data structures"]
+repository = "https://github.com/jonnycoombes/chisel-stringtable"
 
 [dependencies]
+fxhash = "0.2.1"
