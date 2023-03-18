@@ -3,6 +3,6 @@
 //! and simplicity, although don't rely on this implementation if you're looking for cryptographic
 //! soundness.
 pub mod btree_string_table;
-mod common;
+pub mod common;
 #[cfg(test)]
 mod test;
