@@ -7,7 +7,7 @@ rust-version = "1.56"
 description = "Simple hash-based string cache"
 license = "MIT OR Apache-2.0"
 keywords = ["strings", "hash", "interning", "cache"]
-categories = ["data structures"]
+categories = []
 repository = "https://github.com/jonnycoombes/chisel-stringtable"
 
 [dependencies]
