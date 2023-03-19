@@ -19,6 +19,9 @@ pub trait StringTable<'a, Key : PartialOrd + Copy>
 
     /// Attempts to retrieve a given value from the table.
     fn get(&self, key : Key) -> Option<&Cow<'a, str>>;
+
+    /// The number of elements currently within the table
+    fn len(&self) -> usize;
 }
 
 /// Alias for a hash function type

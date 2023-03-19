@@ -57,4 +57,8 @@ impl <'a> StringTable<'a, u32> for BTreeStringTable<'a> {
     fn get(&self, key: u32) -> Option<&Cow<'a, str>> {
        self.index.get(&key)
     }
+
+    fn len(&self) -> usize {
+        self.index.len()
+    }
 }
