@@ -1,6 +1,6 @@
 [package]
 name = "chisel-stringtable"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Jonny Coombes <jcoombes@jcs-software.co.uk>"]
 rust-version = "1.56"
@@ -12,6 +12,9 @@ repository = "https://github.com/jonnycoombes/chisel-stringtable"
 
 [dependencies]
 fxhash = "0.2.1"
+
+[dev-dependencies]
+rand = "0.8.5"
 
 [features]
 default = []
