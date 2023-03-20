@@ -35,6 +35,16 @@ impl <'a> BTreeStringTable<'a>
     }
 }
 
+impl <'a> Clone for BTreeStringTable<'a>  {
+    /// Clone the contents of a given [BTreeStringTable] instance
+    fn clone(&self) -> Self {
+        BTreeStringTable {
+            hasher : RefCell::new(Box::new(FxHasher::default())),
+            index : self.index.clone()
+        }
+    }
+}
+
 impl <'a> StringTable<'a, u64> for BTreeStringTable<'a> {
     fn add(&mut self, value: &str) -> u64 {
         let hash = self.hash(value);
