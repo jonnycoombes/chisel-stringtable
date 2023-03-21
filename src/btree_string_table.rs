@@ -1,4 +1,6 @@
-//!
+//! Default implementation of a [StringTable] based on an internal B-Tree index, which maps `u64`
+//! hash values to owned [String] instances.  When you access a given value, you will be given a
+//! [Cow] preventing unnecessary allocations within immutable use cases.
 //!
 use std::borrow::Cow;
 use std::cell::{RefCell};
@@ -7,11 +9,11 @@ use std::hash::Hasher;
 use fxhash::FxHasher;
 use crate::common::{StringTable};
 
-/// Default implementation just maintains a btree keyed on a 32-bit fxhash value
+/// Default implementation just maintains a btree keyed on a 64-bit fxhash value
 #[derive()]
 pub struct BTreeStringTable<'a>
 {
-    /// The hash function pointer
+    /// The [Hasher] inside a [RefCell]
     hasher: RefCell<Box<dyn Hasher>>,
 
     /// The internal map carrying the actual strings
@@ -20,7 +22,7 @@ pub struct BTreeStringTable<'a>
 
 impl <'a> BTreeStringTable<'a>
 {
-    /// Create a new string table with default initial capacity using the default hash function
+    /// Create a new string table with default initial capacity using the default hasher
     pub fn new() -> Self {
         BTreeStringTable{
             hasher: RefCell::new(Box::new(FxHasher::default())),
@@ -28,6 +30,7 @@ impl <'a> BTreeStringTable<'a>
         }
     }
 
+    /// Hash a given string slice using the hasher
     fn hash(&self, value : &str) -> u64 {
         let mut hasher = self.hasher.borrow_mut();
         hasher.write(value.as_bytes());
