@@ -1,8 +1,8 @@
+use std::collections::hash_map::DefaultHasher;
 use std::env;
 use std::fs::File;
 use std::hash::Hasher;
 use std::io::{BufRead, BufReader};
-use fxhash::FxHasher;
 use chisel_stringtable::btree_string_table::BTreeStringTable;
 use chisel_stringtable::common::StringTable;
 
@@ -32,6 +32,14 @@ fn should_not_contain_collisions() {
 }
 
 #[test]
+fn should_identity_existing_entries(){
+    let (_, words) = load_words();
+    let hash = words.hash("day");
+    assert_eq!(words.get(hash).unwrap(), "day");
+    assert!(words.contains("day"));
+}
+
+#[test]
 fn should_add_all_keys(){
     let (keys, words) = load_words();
     let samples : Vec<&u64> = keys.choose_multiple(&mut rand::thread_rng(), 5000).collect();
@@ -55,7 +63,7 @@ fn should_remove_randomly() {
 #[test]
 fn should_return_a_cow() {
     let (_, words) = load_words();
-    let mut hasher = FxHasher::default();
+    let mut hasher = DefaultHasher::default();
     hasher.write("1080".as_bytes());
     let hash = hasher.finish();
     let cow = words.get(hash);

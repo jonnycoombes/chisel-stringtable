@@ -19,4 +19,8 @@ pub trait StringTable<'a, Key : PartialOrd + Copy>
     /// The number of elements currently within the table
     fn len(&self) -> usize;
 
+    fn contains(&self, value : &str) -> bool;
+
+    fn hash(&self, value : &str) -> u64;
+
 }
