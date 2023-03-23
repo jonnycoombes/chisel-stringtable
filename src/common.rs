@@ -19,8 +19,12 @@ pub trait StringTable<'a, Key : PartialOrd + Copy>
     /// The number of elements currently within the table
     fn len(&self) -> usize;
 
-    fn contains(&self, value : &str) -> bool;
+    /// Check whether a given value already exists within the table.  If it does, then
+    /// return the hash value associated with it.  If not, just return None.
+    fn contains(&self, value : &str) -> Option<u64>;
 
+    /// Get the hash value associated with a given value.  This should be consistent and
+    /// repeatable between calls for the same value.
     fn hash(&self, value : &str) -> u64;
 
 }

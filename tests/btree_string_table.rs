@@ -36,7 +36,7 @@ fn should_identity_existing_entries(){
     let (_, words) = load_words();
     let hash = words.hash("day");
     assert_eq!(words.get(hash).unwrap(), "day");
-    assert!(words.contains("day"));
+    assert!(words.contains("day").is_some());
 }
 
 #[test]
